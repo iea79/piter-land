@@ -16,21 +16,6 @@ $footer_height: 								120px;
 $grid_padding:									30px;
 
 
-// Breakpoints 
-// ================================================================
-$breakpoint-small:                               480px !default;
-$breakpoint-medium:                              760px !default;
-$breakpoint-large:                               960px !default;
-$breakpoint-xlarge:                              1200px !default;
-
-$breakpoint-mini-max:                            ($breakpoint-small - 1) !default;
-$breakpoint-small-max:                           ($breakpoint-medium - 1) !default;
-$breakpoint-medium-max:                          ($breakpoint-large - 1) !default;
-$breakpoint-large-max:                           ($breakpoint-xlarge - 1) !default;
-
-
-
-
 // Fonts
 @font-face {
   font-family: 'Impact';
@@ -234,26 +219,6 @@ ol,ul {
 	margin: 0;
 }
 
-.list {
-	margin-top: 25px;
-	margin-bottom: 25px;
-	&>* {
-		line-height: 18px;
-		padding-left: 15px;
-		&:before {
-			content: '·';
-			font-size: 30px;
-			display: inline-block;
-			vertical-align: sub;
-			margin-right: 5px;
-			margin-left: -14px;;
-		}
-		&+* {
-			padding-top: 13px;
-		}
-	}
-}
-
 p {
 	padding: 0;
 	margin: 0;
@@ -261,16 +226,6 @@ p {
 
 img {
 	max-width: 100%;
-	&.fl__left { // Для картинок с обтекание внутри основного контента сайта
-		margin-top: 14px;
-		margin-right: 29px;
-		margin-bottom: 20px;
-	}
-	&.fl__right { // Для картинок с обтекание внутри основного контента сайта
-		margin-top: 14px;
-		margin-bottom: 20px;
-		margin-left: 29px;
-	}
 }
 
 // Main wrappers =====================================
@@ -290,136 +245,6 @@ img {
 	margin-right: auto;
 }
 
-// Input text and textarea ================================================
-input:not([type]),
-input[type=text],
-input[type=password],
-input[type=email],
-input[type=url],
-input[type=search],
-input[type=tel],
-input[type=number],
-input[type=datetime], 
-textarea {
-	background-color: white;
-	border: 1px solid #ccc;
-	padding: 6px 15px;
-	outline: none;
-	font-size: 16px;
-	font-weight: 300;
-	font-family: $main_font_family;
-	@include border-radius(5px);
-	@include trs(0.3s);
-	&:hover {
-	}
-	&:focus {
-		border: 1px solid #bebebe;
-		background-color: #f6f6f6;
-		@include placeholder {
-			color: red;
-		}
-	}
-	&.input_error {
-		background-color: #fff0f0;
-		border: 1px solid red;
-	}
-	// Placeholder for input +++++++++++++++
-	@include placeholder {
-		color: #b3b3b3;
-	}
-}
-
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    height: auto;
-}
-
-// Input checkbox and radio ===============================================
-input[type=checkbox],
-input[type=radio] {
-	padding: 0;
-}
-
-input[type=checkbox]:not(:disabled),
-input[type=radio]:not(:disabled) {
-    cursor: pointer;
-}
-
-input[type=checkbox],
-input[type=radio] {
-    display: inline-block;
-    height: 14px;
-    width: 14px;
-    border: 1px solid #aaa;
-    overflow: hidden;
-    margin-top: -4px;
-    vertical-align: middle;
-    -webkit-appearance: none;
-    outline: 0;
-    background: 0 0;
-    text-align: center;
-    position: relative;
-}
-
-input[type=radio] {
-    border-radius: 50%;
-}
-
-input[type=checkbox]:before,
-input[type=radio]:before {
-    display: block;
-}
-
-input[type=radio]:checked:before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    top: 50%;
-    left: 50%;
-    margin-top: -3px;
-    margin-left: -3px;
-    display: block;
-    position: absolute;
-    border-radius: 50%;
-    background: #000;
-}
-
-input[type=checkbox]:checked:before,
-input[type=checkbox]:indeterminate:before {
-    content: "\2714";
-    font-size: 12px;
-    -webkit-font-smoothing: antialiased;
-    text-align: center;
-    line-height: 13px;
-    color: #000;
-}
-
-input[type=checkbox]:indeterminate:before {
-    content: "\f068";
-}
-
-input[type=checkbox]:disabled,
-input[type=radio]:disabled {
-    border-color: #ddd;
-}
-
-input[type=radio]:disabled:checked:before {
-    background-color: #aaa;
-}
-
-input[type=checkbox]:disabled:checked:before,
-input[type=checkbox]:disabled:indeterminate:before {
-    color: #aaa;
-}
-
-.error {
-	color: red;
-}
 
 // Grid
 // ------------------------
@@ -438,16 +263,15 @@ input[type=checkbox]:disabled:indeterminate:before {
 // ------------------------
 .grid {
 	margin-left: -$grid_padding;
-	@include display-flex;
-	@include flex-wrap(wrap);
-	// @include justify-content(flex-start);
 	@extend %clear_all;
+	@supports (display: flex) {	
+		@include display-flex;
+		@include flex-wrap(wrap);
+	}
 	&__wrapper {
 		padding-left: $grid_padding;
 		padding-bottom: $grid_padding;
 		@include flex(none);
-		// @include align-items(stretch);
-		// @include align-content(stretch);
 		float: left;
 	}
 	&__item {
@@ -506,6 +330,38 @@ input[type=checkbox]:disabled:indeterminate:before {
 		letter-spacing: 1.53em;
 		padding-left: 35px;
 	}
+	@media (max-width: 991px) {
+		&__title {
+			font-size: 18px;
+			letter-spacing: 0.9em;
+		}
+		
+	}
+	@media (max-width: 767px) {
+		&__title {
+			padding-top: 18px;
+			font-size: 15px;
+			letter-spacing: 0.9em;
+		}
+	}
+	@media (max-width: 480px) {
+		&__logo {
+			float: none;
+			padding: 10px;
+			text-align: center;
+			margin: 0;
+			display: block;
+			img {
+				width: 74px;
+			}
+		}
+		&__title {
+			overflow: auto;
+			padding: 0 10px 10px;
+			text-align: center;
+			font-size: 10px;
+		}
+	}
 }
 
 // .logo {
@@ -547,7 +403,6 @@ input[type=checkbox]:disabled:indeterminate:before {
 		color: #ffc600;
 		font-family: Impact;
 		font-size: 30px;
-		// font-weight: 400;
 		text-transform: uppercase;
 		width: 160px;
 		margin-top: 30px;
@@ -594,6 +449,84 @@ input[type=checkbox]:disabled:indeterminate:before {
 			margin-top: -32px;
 		}
 	}
+	@media (max-width: 991px) {
+		&_center {
+			margin-right: 100px;
+		}
+	}
+	@media (max-width: 767px) {
+		.container_center {
+			padding-left: 20px;
+			padding-right: 20px;
+			min-height: auto;
+		}
+		&_left {
+			float: none;
+			margin-top: 0;
+			padding-top: 30px;
+			width: 100%;
+			text-align: center;
+			font-size:16px;
+			&:after {
+				content: '';
+				display: table;
+				width: 100%;
+				clear: both;
+			}
+			img {
+				display: inline-block;
+				margin-right: 20px;
+				max-width: 121px;
+				margin-bottom: 0;
+				vertical-align: text-top;
+			}
+		}
+		&_right {
+			float: none;
+			width: 100%;
+			text-align: left;
+			max-width: 390px;
+			margin: 0 auto;
+			padding-bottom: 20px;
+			&:after {
+				content: '';
+				display: table;
+				width: 100%;
+				clear: both;
+			}
+		}
+		&_date {
+			display: inline-block;
+			vertical-align: top;
+			font-size: 18px;
+			margin: -5px 10px 0;
+			span {
+				font-size: 46px;
+			}
+		}
+		&_time {
+			float: right;
+			margin: 0;
+			padding: 8px 0 6px 20px;
+			border-top: 0;
+			border-left: 3px solid #fff;
+		}
+		&_center {
+			overflow: auto;
+			width: 100%;
+			margin: 20px 0 0;
+		}
+	}
+	@media (max-width: 480px) {
+		&_left {
+			text-align: left;
+			font-size: 18px;
+			img {
+				float: left;
+				max-width: 153px;
+			}
+		}
+	}
 }
 
 
@@ -629,9 +562,24 @@ input[type=checkbox]:disabled:indeterminate:before {
 	.grid {
 		@include flex-wrap(nowrap);
 		margin-left: -10px;
+		&__wrapper {
+			padding-left: 10px;
+		}
 	}
-	.grid__wrapper {
-		padding-left: 10px;
+	@media (max-width: 991px) {
+		img {
+			display: inline-block;
+		}
+		.grid {
+			@include flex-wrap(wrap);
+			text-align: center;
+			&__wrapper {
+				width: 50%;
+			}
+		}
+	}
+	@media (max-width: 767px) {
+		
 	}
 }
 
@@ -642,6 +590,12 @@ input[type=checkbox]:disabled:indeterminate:before {
 	line-height: 1.23;
 	display: inline-block;
 	text-align: justify;
+	@media (max-width: 991px) {
+		
+	}
+	@media (max-width: 767px) {
+		
+	}
 }
 
 .about {
@@ -655,6 +609,19 @@ input[type=checkbox]:disabled:indeterminate:before {
 		padding-top: 52px;
 		padding-left: 30px;
 	}
+	@media (max-width: 991px) {
+	}
+	@media (max-width: 480px) {
+		.container_center {
+			min-height: auto;
+			padding-bottom: 49%;
+			background-position: center bottom;
+		}
+		.section__text {
+			padding: 50px 20px;
+			max-width: 100%;
+		}
+	}
 }
 
 .feliks {
@@ -665,9 +632,23 @@ input[type=checkbox]:disabled:indeterminate:before {
 		margin-bottom: 6px;
 	}
 	.section__text {
-		max-width: 335px;
+		max-width: 337px;
 		padding-top: 55px;
 		padding-left: 30px;
+	}
+	@media (max-width: 991px) {
+		
+	}
+	@media (max-width: 480px) {
+		.container_center {
+			min-height: auto;
+			padding-bottom: 58%;
+			background-position: center bottom;
+		}
+		.section__text {
+			padding: 50px 20px;
+			max-width: 100%;
+		}
 	}
 }
 
@@ -685,6 +666,25 @@ input[type=checkbox]:disabled:indeterminate:before {
 		margin-top: 62px;
 		margin-left: 135px;
 		margin-bottom: 5px;
+	}
+	@media (max-width: 991px) {
+		.container_center {
+			text-align: right;
+		}
+		.section__text {
+			margin-right: 30px;
+		}
+	}
+	@media (max-width: 480px) {
+		.container_center {
+			min-height: auto;
+			background-position: center top;
+		}
+		.section__text {
+			margin: 0;
+			padding: 50px 20px;
+			max-width: 100%;
+		}
 	}
 }
 
@@ -720,6 +720,24 @@ input[type=checkbox]:disabled:indeterminate:before {
 			vertical-align: middle;
 		}
 	}
+	@media (max-width: 991px) {
+		&__wrap {
+			padding: 0 10px 30px;
+			text-align: center;
+			&_label {
+				display: block;
+				margin-bottom: 10px;
+				margin-right: 0;
+			}
+			a {
+				margin: 5px;
+			}
+		}		
+	}
+	@media (max-width: 767px) {
+		background-size: cover;
+		background-position: top 200px center;
+	}
 }
 
 .comand {
@@ -728,10 +746,11 @@ input[type=checkbox]:disabled:indeterminate:before {
 	// margin-bottom: -15px;
 	.grid {
 		margin-left: -10px;
-	}
-	.grid__wrapper {
-		padding-left: 10px;
-		padding-bottom: 14px;
+		&__wrapper {
+			padding-left: 10px;
+			padding-bottom: 14px;
+			@extend %clear_a;
+		}
 	}
 	&__title {
 		color: #ffc600;
@@ -782,6 +801,34 @@ input[type=checkbox]:disabled:indeterminate:before {
 		display: inline-block;
 		margin-bottom: 2px;
 	}
+	@media (max-width: 991px) {
+		.grid {
+			&__wrapper {
+				width: 33.3%;
+			}
+		}
+	}
+	@media (max-width: 767px) {
+		.grid {
+			&__wrapper {
+				width: 50%;
+			}
+		}
+	}
+	@media (max-width: 480px) {
+		.grid {
+			margin-left: -20px;
+			&__wrapper {
+				padding-left: 20px;
+				width: 100%;
+			}
+		}
+		&__name,&__status,.grid a {
+			padding-left: 0;
+			text-align: center;
+			display: block;
+		}
+	}
 }
 
 /* Footer
@@ -813,27 +860,13 @@ input[type=checkbox]:disabled:indeterminate:before {
 			}
 		}
 	}
+	@media (max-width: 991px) {
+		
+	}
+	@media (max-width: 767px) {
+		&__vk {
+			padding-left: 0;
+		}
+	}
 }
-
-/* Responsive styles
------------------------------------------------------------------------------ */
-// max-width: 1200px ===========================================================
-@media (max-width: $breakpoint-xlarge) {
-}
-
-// max-width: 960px ===========================================================
-@media (max-width: $breakpoint-large) {
-	
-}
-
-// max-width: 760px ===========================================================
-@media (max-width: $breakpoint-medium) {
-	
-}
-
-// max-width: 480px ===========================================================
-@media (max-width: $breakpoint-small) {
-	
-}
-
 

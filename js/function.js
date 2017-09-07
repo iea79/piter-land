@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    if (!('flex' in document.documentElement.style)) {
+		var not_flex = true;
+    }
+
 	// First screen full height
 	function setHeiHeight() {
 	    $('.full__height').css({
@@ -7,7 +11,11 @@ $(document).ready(function() {
 	    });
 	}
 	setHeiHeight(); // устанавливаем высоту окна при первой загрузке страницы
-	$(window).resize( setHeiHeight ); // обновляем при изменении размеров окна
+	dateReplace()
+	$(window).resize(function(){
+		setHeiHeight();
+		dateReplace();
+	}); // обновляем при изменении размеров окна
 
 
 	// Reset link whte attribute href="#"
@@ -15,26 +23,30 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 
-	// Scroll to ID // Плавный скролл к элементу при нажатии на ссылку. В ссылке указываем ID элемента
-	// $('#main__menu a[href^="#"]').click( function(){ 
-	// 	var scroll_el = $(this).attr('href'); 
-	// 	if ($(scroll_el).length != 0) {
-	// 	$('html, body').animate({ scrollTop: $(scroll_el).offset().top }, 500);
-	// 	}
-	// 	return false;
-	// });
-
-	// Stiky menu // Липкое меню. При прокрутке к элементу #header добавляется класс .stiky который и стилизуем
-    // $(document).ready(function(){
-    //     var HeaderTop = $('#header').offset().top;
-        
-    //     $(window).scroll(function(){
-    //             if( $(window).scrollTop() > HeaderTop ) {
-    //                     $('#header').addClass('stiky');
-    //             } else {
-    //                     $('#header').removeClass('stiky');
-    //             }
-    //     });
-    // });
+    if (not_flex) {
+		setEqualHeight();
+    }
 
 });
+
+function setEqualHeight() {
+	var tallestcolumn = 0;
+	var columns = $('.comand .grid__item');
+	columns.each( function() {
+		currentHeight = $(this).height();
+		if(currentHeight > tallestcolumn) {
+			tallestcolumn = currentHeight;
+		}
+	});
+	columns.css({
+		minHeight: tallestcolumn
+	});
+}
+
+function dateReplace() {
+	if ($(window).width() < 768 ) {
+		$('.first__screen_right').insertAfter('.first__screen_center');
+	} else {
+		$('.first__screen_right').insertBefore('.first__screen_center');
+	}
+}
