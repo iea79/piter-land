@@ -7,7 +7,7 @@
  */
 
 // Compass extention 
-@import 'compass/css3';
+// @import 'compass/css3';
 
 // Global variables
 // ========================================================================
@@ -180,7 +180,7 @@ $btn_contrast_text_color:                        #fff;
 * {
 	margin: 0;
 	padding: 0;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
@@ -190,7 +190,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 html,body,.wrapper {
 	height: 100%;
 	position: relative;
-	@include box-sizing(content-box);
+	box-sizing: content-box;
 }
 
 body { 
@@ -265,13 +265,13 @@ img {
 	margin-left: -$grid_padding;
 	@extend %clear_all;
 	@supports (display: flex) {	
-		@include display-flex;
-		@include flex-wrap(wrap);
+		display: flex;
+		flex-wrap: wrap;
 	}
 	&__wrapper {
 		padding-left: $grid_padding;
 		padding-bottom: $grid_padding;
-		@include flex(none);
+		// flex(none);
 		float: left;
 	}
 	&__item {
@@ -391,7 +391,7 @@ img {
 	background-color: #043675;
 	@extend %clear_a;
 	.container_center {
-		background: image-url('first-bg.png') no-repeat center center;
+		background: url('../img/first-bg.png') no-repeat center center;
 		background-size: cover;
 		padding-top: 0;
 		min-height: 571px;
@@ -423,10 +423,10 @@ img {
 		font-size: 24px;
 		// font-weight: 400;
 		span {
-			font-size: 65px;
+			font-size: 36px;
 			display: block;
-			text-align: center;
-			margin-bottom: -10px;
+			// text-align: center;
+			margin-bottom: 1px;
 		}
 	}
 	&_time {
@@ -500,8 +500,9 @@ img {
 			vertical-align: top;
 			font-size: 18px;
 			margin: -5px 10px 0;
+			width: 50%;
 			span {
-				font-size: 46px;
+				font-size: 34px;
 			}
 		}
 		&_time {
@@ -560,7 +561,7 @@ img {
 	}
 	.container_center {}
 	.grid {
-		@include flex-wrap(nowrap);
+		flex-wrap: nowrap;
 		margin-left: -10px;
 		&__wrapper {
 			padding-left: 10px;
@@ -571,7 +572,7 @@ img {
 			display: inline-block;
 		}
 		.grid {
-			@include flex-wrap(wrap);
+			flex-wrap: wrap;
 			text-align: center;
 			&__wrapper {
 				width: 50%;
@@ -600,7 +601,7 @@ img {
 
 .about {
 	.container_center {
-		background: image-url('bg-2.png') no-repeat center center;
+		background: url('../img/bg-2.png') no-repeat center center;
 		background-size: 100%;
 		min-height: 541px;
 	}
@@ -626,7 +627,7 @@ img {
 
 .feliks {
 	.container_center {
-		background: image-url('bg-3.png') no-repeat bottom right;
+		background: url('../img/bg-3.png') no-repeat bottom right;
 		background-size: contain;
 		min-height: 490px;
 		margin-bottom: 6px;
@@ -655,7 +656,7 @@ img {
 .jazz {
 	// background-size: 1128px;
 	.container_center {
-		background: image-url('bg-4.png') no-repeat top right;
+		background: url('../img/bg-4.png') no-repeat top right;
 		text-align: center;
 		max-width: 1230px;
 		margin-bottom: 38px;
@@ -689,7 +690,7 @@ img {
 }
 
 .buy {
-	background: image-url('bg-6.png') no-repeat center;
+	background: url('../img/bg-6.png') no-repeat center;
 	background-size: contain;
 	padding-bottom: 30px;
 	.container_center {
@@ -847,7 +848,7 @@ img {
 		padding-left: 57px;
 		color: #fff;
 		&:before {
-			content: image-url('vk.png');
+			content: url('../img/vk.png');
 			display: inline-block;
 			margin-right: 7px;
 			vertical-align: middle;
